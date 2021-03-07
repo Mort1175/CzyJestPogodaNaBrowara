@@ -33,20 +33,22 @@ export class WeatherService {
       //@ts-ignore
       uri += `?lat=${loc.value.latitude}&lon=${loc.value.longitude}`;
     } else {
-      console.log('makeWeatherURL: Building Zip Code URL');
+      console.log('makeWeatherURL: Building City Name URL');
       //@ts-ignore
-      uri += `?zip=${loc.value.PostalCode}`;
+      uri += `?q=${loc.value.CityName}`;
     }
     // Configure output for imperial (English) measurements
-    uri += '&units=imperial';
+    uri += '&units=metric';
     // Use the following instead for metric
     //  uri += '&units=metric';
     // Append the API Key to the end of the URI
-    uri += `&APPID=${Config.weatherKey}`;
+    uri += `&appid=${Config.weatherKey}`;
+    uri += `&lang=pl`;
     console.log(`Service URL: ${uri}`);
     // Return the value
     return uri;
   }
+
 
   getCurrent(loc: LocationConfig): Promise<any> {
     console.log('WeatherService: getCurrent()');

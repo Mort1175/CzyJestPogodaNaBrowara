@@ -2,32 +2,74 @@
   <ion-toolbar>
       <ion-title size="large" slot="primary">LOKALIZACJA</ion-title>
       <ion-icon name="beer-outline" size="large" slot=end ></ion-icon>
+      <ion-buttons slot="start">
+        <ion-button (click)="getLocalWeather()">
+          <ion-icon slot="icon-only" name="locate"></ion-icon>
+        </ion-button>
+        <ion-button (click)="updatePage()">
+          <ion-icon slot="icon-only" name="refresh"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 
 <ion-content [fullscreen]="true" class="background">
 
-  <ion-card >
-    <ion-card-header>
-    <app-aktualna-lokalizacja></app-aktualna-lokalizacja>
-    </ion-card-header>
-    <app-aktualna-pogoda></app-aktualna-pogoda>
-  </ion-card>
-
-
-    <ion-card >
-    <app-wpisz-miasto></app-wpisz-miasto>
-  </ion-card>
 
   <ion-card>
-  <ion-item>
-    <app-pole-lokalizacji></app-pole-lokalizacji>
-  </ion-item>
+    <ion-item>
+      <form (ngSubmit)="setCityName()">
+        <ion-item>
+          <ion-label>Wpisz miasto:</ion-label>
+          <ion-input type="text" [(ngModel)]="searchInput" name="CityName" placeholder="Nazwa Miasta"></ion-input>
+        </ion-item>
+        <ion-button type="submit" expand="block">
+          <ion-icon slot="start" name="locate"></ion-icon>
+          Ustaw miasto
+        </ion-button>
+      </form>
 
+    </ion-item>
+    </ion-card>
 
-  <app-gps></app-gps>
+  <ion-card >
+    <ion-segment [(ngModel)]="displayMode">
+      <ion-segment-button value="current">
+        Aktualna
+      </ion-segment-button>
+      <ion-segment-button value="forecast">
+        Prognoza
+      </ion-segment-button>
+    </ion-segment>
+
+    <div [ngSwitch]="displayMode">
+
+      <ion-list no-lines *ngSwitchCase="'current'">
+        <!--show this if there are no items in the list-->
+        <ion-item [hidden]="currentItems.length > 0">
+          <p><strong>Weather data is not available</strong></p>
+        </ion-item>
+        <!--Display the current conditions data we have -->
+        <ion-item *ngFor="let c_item of currentItems">
+          <p><strong>{{c_item.name}}:</strong> {{c_item.value}}</p>
+        </ion-item>
+      </ion-list>
+
+      <ion-list inset *ngSwitchCase="'forecast'">
+        <ion-item text-class="ion-text-wrap" lines="none">
+          {{ forecastItems.length ? 'Tap an item to view the forecast for the selected period.': 'Forecast data is not available at this time.' }}
+        </ion-item>
+        <ion-item lines="full" *ngFor="let item of forecastItems" (click)="viewForecast(item)">
+          <ion-icon name="time" slot="start"></ion-icon>
+          {{item.period}}
+        </ion-item>
+      </ion-list>
+
+    </div>
+
   </ion-card>
+
 
 </ion-content>
 

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, LoadingController, NavController, Platform } from '@ionic/angular';
 import { Geolocation, Plugins } from '@capacitor/core';
-
 import { Config } from '../config';
 import { WeatherService } from '../services/weather.service';
 import { LocationConfig, LocationType } from '../interfaces/location';
@@ -141,7 +140,7 @@ export class HomePage {
     console.log('HomePage: updatePage()');
     // Do we have a location config?
     if (this.locationConfig) {
-      // Get the weather conditions for the current location configuration 
+      // Get the weather conditions for the current location configuration
       // (zip code or geolocation)
       this.updateCurrentWeather();
       this.updateForecast();

@@ -9,30 +9,30 @@
       </ion-button>
     </ion-buttons>
     <ion-title>
-      Weather App (Ionic 4)
+      POGODA NA BROWARA
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form (ngSubmit)="setPostalCode()">
+  <form (ngSubmit)="setCityName()">
     <ion-item>
-      <ion-label>Enter a Postal Code:</ion-label>
-      <ion-input type="text" [(ngModel)]="searchInput" name="PostalCode" placeholder="Postal Code"></ion-input>
+      <ion-label>Wpisz miasto:</ion-label>
+      <ion-input type="text" [(ngModel)]="searchInput" name="CityName" placeholder="Nazwa Miasta"></ion-input>
     </ion-item>
     <ion-button type="submit" expand="block">
       <ion-icon slot="start" name="locate"></ion-icon>
-      Get Weather for Postal Code
+      Ustaw miasto
     </ion-button>
   </form>
 
   <ion-segment [(ngModel)]="displayMode">
     <ion-segment-button value="current">
-      Current
+      Aktualna
     </ion-segment-button>
     <ion-segment-button value="forecast">
-      Forecast
-    </ion-segment-button>    
+      Prognoza
+    </ion-segment-button>
   </ion-segment>
 
   <div [ngSwitch]="displayMode">
@@ -63,6 +63,6 @@
 
 <ion-footer>
   <ion-toolbar>
-    <ion-title>By <a href="https://johnwargo.com" target="_blank">John M. Wargo</a></ion-title>
-  </ion-toolbar>  
+    <ion-title>V00RT</ion-title>
+  </ion-toolbar>
 </ion-footer>
