@@ -199,7 +199,7 @@ export class Tab2Page {
   }
 
   public  makeDegreeString(temperatureValue: number) {
-    return `${temperatureValue} °C`;
+    return `${temperatureValue.toFixed(0)} °C`;
   }
 
 
