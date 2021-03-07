@@ -1,7 +1,8 @@
 {
   "name": "PogodaNaBrowara",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }
