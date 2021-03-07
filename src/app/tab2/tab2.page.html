@@ -1,17 +1,33 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
+      <ion-title size="large" slot="primary">LOKALIZACJA</ion-title>
+      <ion-icon name="beer-outline" size="large" slot=end ></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+<ion-content [fullscreen]="true" class="background">
+
+  <ion-card >
+    <ion-card-header>
+    <app-aktualna-lokalizacja></app-aktualna-lokalizacja>
+    </ion-card-header>
+    <app-aktualna-pogoda></app-aktualna-pogoda>
+  </ion-card>
+
+
+    <ion-card >
+    <app-wpisz-miasto></app-wpisz-miasto>
+  </ion-card>
+
+  <ion-card>
+  <ion-item>
+    <app-pole-lokalizacji></app-pole-lokalizacji>
+  </ion-item>
+
+
+  <app-gps></app-gps>
+  </ion-card>
+
 </ion-content>
+

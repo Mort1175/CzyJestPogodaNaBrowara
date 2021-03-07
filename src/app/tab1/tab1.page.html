@@ -1,17 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+      <ion-title size="large" slot="primary">POGODA NA BROWARA</ion-title>
+      <ion-icon name="beer-outline" size="large" slot=end ></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="background">
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+
+
+  <ion-card>
+    <app-informacja></app-informacja>
+  </ion-card>
+
+  <ion-card-button  >
+    <app-przycisk-czy-jest></app-przycisk-czy-jest>
+  </ion-card-button>
+
 </ion-content>

@@ -1,24 +1,22 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+      <ion-title size="large" slot="primary">PREFERENCJE</ion-title>
+      <ion-icon name="beer-outline" size="large" slot=end ></ion-icon>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
+<ion-content [fullscreen]="true" class="background">
 
-    </ion-toolbar>
-  </ion-header>
-
-  <div>
+<ion-card>
+  <ion-card-header>
   <app-zapisane-preferencje></app-zapisane-preferencje>
+  </ion-card-header>
   <app-przywroc-domyslne></app-przywroc-domyslne>
-  </div>
-  <ion-c
-  <app-explore-container name="Tab 3 page">  </app-explore-container>
+</ion-card>
+<ion-card>
+  <ion-card-content >
+    <app-pole-preferencji></app-pole-preferencji>
+  </ion-card-content>
+</ion-card>
 
 </ion-content>

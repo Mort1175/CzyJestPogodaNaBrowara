@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { LogoComponent } from './logo.component';
+import { PoleLokalizacjiComponent } from './pole-lokalizacji.component';
 
-describe('LogoComponent', () => {
-  let component: LogoComponent;
-  let fixture: ComponentFixture<LogoComponent>;
+describe('PoleLokalizacjiComponent', () => {
+  let component: PoleLokalizacjiComponent;
+  let fixture: ComponentFixture<PoleLokalizacjiComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ LogoComponent ],
+      declarations: [ PoleLokalizacjiComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(LogoComponent);
+    fixture = TestBed.createComponent(PoleLokalizacjiComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
