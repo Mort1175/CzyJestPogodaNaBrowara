@@ -22,6 +22,7 @@ export class Tab2Page {
     searchInput: string;
     currentItems: Array<any> = [];
     forecastItems: Array<any> = [];
+    pollutionItems: Array<any> = [];
     DAYS: Array<string> = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     searchinput: string;
 
@@ -73,6 +74,8 @@ export class Tab2Page {
           });
       });
   }
+
+
 
   public updateForecast() {
     console.log('HomePage: updateForecast()');
@@ -176,6 +179,7 @@ export class Tab2Page {
       // (zip code or geolocation)
       this.updateCurrentWeather();
       this.updateForecast();
+      this.updateCurrentPollution();
     }
     if (this.platform.ready) {
       this.storage.getItem('lokalizacja')
@@ -183,8 +187,7 @@ export class Tab2Page {
         data => this.locationConfig = data,
         error => console.error(error),
       );
-      this.updateCurrentWeather();
-      this.updateForecast();
+
     } else {
       console.log('HomePage: Skipping page update, no location set');
     }
@@ -227,6 +230,37 @@ export class Tab2Page {
     // When the user selects one of the Forecast periods,
     // open up the details page for the selected period.
     this.nav.navigateForward('/weather', { state: { forecast: item } });
+  }
+
+  public updateCurrentPollution() {
+    console.log('HomePage: updateCurrentPollution()');
+    // clear out the previous array contents
+    this.pollutionItems = [];
+    // Create the loading indicator
+    this.loadingCtrl.create({ message: 'Retrieving pollution conditions...' })
+      .then(loader => {
+        // display it
+        loader.present();
+        // then go get the weather
+        this.service.getPollution(this.locationConfig)
+          .then(data => {
+            // Hide the loading indicator
+            loader.dismiss();
+            // Now, populate the array with data from the weather service
+            if (data) {
+              // We have data, so lets do something with it
+              this.pollutionItems = this.service.formatPollutionData(data);
+            }
+          },
+            error => {
+              // Hide the loading indicator
+              loader.dismiss();
+              console.error('Error retrieving weather data');
+              console.dir(error);
+              this.service.showAlert(error);
+            }
+          );
+      });
   }
 
   ionViewDidEnter() {

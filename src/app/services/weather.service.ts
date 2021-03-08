@@ -17,6 +17,7 @@ export class WeatherService {
   searchInput: string;
   currentItems: Array<any> = [];
   forecastItems: Array<any> = [];
+  pollutionItems: Array<any> = [];
   DAYS: Array<string> = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   constructor(
@@ -73,36 +74,63 @@ export class WeatherService {
     return tmpArray;
   }
 
+  public formatPollutionData(data: any): any {
+
+    console.log('HomePage: formatPollutionData()');
+    // create a blank array to hold our results
+    const tmpArray = [];
+    // Add the weather data values to the array
+
+    if (data.list[0].main.aqi) {
+      // Location name will only be available for current conditions
+      tmpArray.push({ name: 'Jakość ', value: data.list[0].main.aqi });
+    }
+
+    tmpArray.push({ name: 'CO ', value: `${data.list[0].components.co}  μg/m3` });
+    tmpArray.push({ name: 'NO ', value: `${data.list[0].components.no}  μg/m3` });
+    tmpArray.push({ name: 'NO2', value: `${data.list[0].components.no2}  μg/m3` });
+    tmpArray.push({ name: 'O3 ', value: `${data.list[0].components.o3}  μg/m3` });
+    tmpArray.push({ name: 'SO2 ', value: `${data.list[0].components.so2}  μg/m3` });
+    tmpArray.push({ name: 'PM2.5 ', value: `${data.list[0].components.pm2_5}  μg/m3` });
+    tmpArray.push({ name: 'PM10 ', value: `${data.list[0].components.pm10}  μg/m3` });
+    tmpArray.push({ name: 'NH3 ', value: `${data.list[0].components.nh3}  μg/m3` });
+
+
+    return tmpArray;
+  }
+
+
+
+  private makePollutionURL(loc: LocationConfig, command: string): string {
+    console.log('WeatherService: makePollutionURL()');
+    let uri = Config.weatherEndpoint + command;
+    if (loc.type === LocationType.Geolocation) {
+      console.log('makePollutionURL: Building Location URL');
+      // @ts-ignore
+      uri += `?lat=${loc.value.latitude}&lon=${loc.value.longitude}`;
+    }
+    uri += `&appid=${Config.weatherKey}`;
+    console.log(`Service URL: ${uri}`);
+    return uri;
+  }
+
   private makeWeatherURL(loc: LocationConfig, command: string): string {
-    // Build a weather service URL using the command string and
-    // location data that we have.
-    // Current Conditions
-    // api.openweathermap.org/data/2.5/weather?lat=35&lon=139
-    // api.openweathermap.org/data/2.5/weather?zip=94040,us
-    // Forecast
-    // api.openweathermap.org/data/2.5/forecast/daily?lat={lat}&lon={lon}&cnt={cnt}
-    // api.openweathermap.org/data/2.5/forecast/daily?zip=94040,us
     console.log('WeatherService: makeWeatherURL()');
-    // console.dir(loc);
     let uri = Config.weatherEndpoint + command;
     if (loc.type === LocationType.Geolocation) {
       console.log('makeWeatherURL: Building Location URL');
       // @ts-ignore
       uri += `?lat=${loc.value.latitude}&lon=${loc.value.longitude}`;
+      uri += `&lang=pl`;
     } else {
       console.log('makeWeatherURL: Building City Name URL');
       // @ts-ignore
       uri += `?q=${loc.value.CityName}`;
     }
-    // Configure output for imperial (English) measurements
     uri += '&units=metric';
-    // Use the following instead for metric
-    //  uri += '&units=metric';
-    // Append the API Key to the end of the URI
     uri += `&appid=${Config.weatherKey}`;
-    uri += `&lang=pl`;
     console.log(`Service URL: ${uri}`);
-    // Return the value
+
     return uri;
   }
 
@@ -117,6 +145,19 @@ export class WeatherService {
     buttons: [{ text: theButton }]
   }).then((alert) => alert.present());
   }
+
+    getPollution(loc: LocationConfig): Promise<any> {
+    console.log('WeatherService: getPollution()');
+    const url: string = this.makePollutionURL(loc, 'air_pollution');
+    return new Promise((resolve, reject) => {
+    this.http.get(url).subscribe(data => {
+      resolve(data);
+    }, error => {
+      console.error(error.message);
+      reject(error.message);
+    });
+  });
+}
 
   getCurrent(loc: LocationConfig): Promise<any> {
     console.log('WeatherService: getCurrent()');

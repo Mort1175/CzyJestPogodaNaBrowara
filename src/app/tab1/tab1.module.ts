@@ -3,11 +3,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Tab1Page } from './tab1.page';
-import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
-
 import { Tab1PageRoutingModule } from './tab1-routing.module';
 import { InformacjaComponent } from './informacja/informacja.component';
-
 import { PrzyciskCzyJestComponent } from './przycisk-czy-jest/przycisk-czy-jest.component';
 
 @NgModule({
@@ -15,7 +12,6 @@ import { PrzyciskCzyJestComponent } from './przycisk-czy-jest/przycisk-czy-jest.
     IonicModule,
     CommonModule,
     FormsModule,
-    ExploreContainerComponentModule,
     Tab1PageRoutingModule
   ],
   declarations: [

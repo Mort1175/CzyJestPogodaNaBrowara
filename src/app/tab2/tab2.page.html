@@ -21,8 +21,7 @@
     <ion-item>
       <form (ngSubmit)="setCityName()">
         <ion-item>
-          <ion-label>Wpisz miasto:</ion-label>
-          <ion-input type="text" [(ngModel)]="searchInput" name="CityName" placeholder="Nazwa Miasta"></ion-input>
+          <ion-input type="text" [(ngModel)]="searchInput" name="CityName" placeholder="Wpisz miasto"></ion-input>
         </ion-item>
         <ion-button type="submit" expand="block">
           <ion-icon slot="start" name="locate"></ion-icon>
@@ -41,6 +40,9 @@
       <ion-segment-button value="forecast">
         Prognoza
       </ion-segment-button>
+      <ion-segment-button value="pollution">
+        Zanieczyszczenia
+      </ion-segment-button>
     </ion-segment>
 
     <div [ngSwitch]="displayMode">
@@ -58,11 +60,23 @@
 
       <ion-list inset *ngSwitchCase="'forecast'">
         <ion-item text-class="ion-text-wrap" lines="none">
-          {{ forecastItems.length ? 'Tap an item to view the forecast for the selected period.': 'Forecast data is not available at this time.' }}
+          {{ forecastItems.length ? 'Wybierz z poniższej listy godzinę prognozy': 'Dane pogodowe niedostępne.' }}
         </ion-item>
         <ion-item lines="full" *ngFor="let item of forecastItems" (click)="viewForecast(item)">
           <ion-icon name="time" slot="start"></ion-icon>
           {{item.period}}
+        </ion-item>
+      </ion-list>
+
+      <ion-list no-lines *ngSwitchCase="'pollution'">
+        <!--show this if there are no items in the list-->
+        <ion-item [hidden]="pollutionItems.length > 0">
+          <p><strong>Weather data is not available</strong></p>
+        </ion-item>
+        <!--Display the current conditions data we have -->
+        <ion-item>(1-Dobra)(2-Przeciętna)(3-Niekorzystna)(4-Zła)(5-Bardzo zła)</ion-item>
+        <ion-item *ngFor="let e_item of pollutionItems">
+          <p><strong>{{e_item.name}}:</strong> {{e_item.value}}</p>
         </ion-item>
       </ion-list>
 
