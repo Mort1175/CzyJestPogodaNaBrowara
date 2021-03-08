@@ -10,7 +10,6 @@ export class WeatherPage implements OnInit {
 
   forecast: any;
 
-  // console.log('WeatherPage: ');
   constructor(
     private route: ActivatedRoute,
     private router: Router
@@ -22,7 +21,7 @@ export class WeatherPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       const state = this.router.getCurrentNavigation().extras.state;
       this.forecast = state.forecast;
+      console.log(params);
     });
   }
-
 }

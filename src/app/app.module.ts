@@ -8,7 +8,7 @@ import { WeatherService } from './services/weather.service';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 
 @NgModule({
@@ -24,6 +24,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
     { provide: RouteReuseStrategy,
      useClass: IonicRouteStrategy },
      StatusBar,
+     NativeStorage,
      SplashScreen,
      WeatherService,
      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
