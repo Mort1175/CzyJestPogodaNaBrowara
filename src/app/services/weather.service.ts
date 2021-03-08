@@ -150,6 +150,7 @@ export class WeatherService {
     console.log('WeatherService: getPollution()');
     const url: string = this.makePollutionURL(loc, 'air_pollution');
     return new Promise((resolve, reject) => {
+    // tslint:disable-next-line: deprecation
     this.http.get(url).subscribe(data => {
       resolve(data);
     }, error => {
@@ -163,6 +164,7 @@ export class WeatherService {
     console.log('WeatherService: getCurrent()');
     const url: string = this.makeWeatherURL(loc, 'weather');
     return new Promise((resolve, reject) => {
+      // tslint:disable-next-line: deprecation
       this.http.get(url).subscribe(data => {
         resolve(data);
       }, error => {
@@ -176,6 +178,7 @@ export class WeatherService {
     console.log('WeatherService: getForecast()');
     const url: string = this.makeWeatherURL(loc, 'forecast');
     return new Promise((resolve, reject) => {
+      // tslint:disable-next-line: deprecation
       this.http.get(url).subscribe(data => {
         resolve(data);
       }, error => {

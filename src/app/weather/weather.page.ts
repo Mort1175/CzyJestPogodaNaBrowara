@@ -18,6 +18,7 @@ export class WeatherPage implements OnInit {
   }
 
   ngOnInit() {
+    // tslint:disable-next-line: deprecation
     this.route.queryParams.subscribe(params => {
       const state = this.router.getCurrentNavigation().extras.state;
       this.forecast = state.forecast;

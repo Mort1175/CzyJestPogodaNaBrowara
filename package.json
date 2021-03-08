@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "~11.2.0",
     "@angular/router": "~11.2.0",
     "@capacitor/core": "2.4.7",
+    "@ionic-native/app-preferences": "^5.31.1",
     "@ionic-native/geolocation": "^5.31.1",
     "@ionic-native/http": "^5.31.1",
     "@ionic-native/native-storage": "^5.31.1",
@@ -27,6 +28,7 @@
     "@ionic-native/status-bar": "^5.31.1",
     "@ionic/angular": "^5.5.2",
     "cordova": "^9.0.0",
+    "cordova-plugin-app-preferences": "^0.99.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

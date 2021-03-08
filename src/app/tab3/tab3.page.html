@@ -7,15 +7,33 @@
 
 <ion-content [fullscreen]="true" class="background">
 
-<ion-card>
-  <ion-card-header>
-  <app-zapisane-preferencje></app-zapisane-preferencje>
-  </ion-card-header>
-  <app-przywroc-domyslne></app-przywroc-domyslne>
-</ion-card>
+
 <ion-card>
   <ion-card-content >
-    <app-pole-preferencji></app-pole-preferencji>
+    <ion-item>
+      <form (ngSubmit)="zapiszPreferencje()">
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="temepratura" name="temepratura" placeholder="temepratura"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="wilgotnosc" name="wilgotnosc" placeholder="wilgotność"></ion-input>
+
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="wiatr" name="wiatr" placeholder="wiatr"></ion-input>
+
+        </ion-item>
+        <ion-item>
+          <ion-input type="text" [(ngModel)]="warunki" name="warunki" placeholder="warunki"></ion-input>
+
+        </ion-item>
+        <ion-button type="submit" expand="block">
+          <ion-icon slot="start" name="locate"></ion-icon>
+          Ustaw miasto
+        </ion-button>
+      </form>
+
+    </ion-item>
   </ion-card-content>
 </ion-card>
 
