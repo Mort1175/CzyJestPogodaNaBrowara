@@ -11,6 +11,7 @@ enum TempScale { Fahrenheit, Celsius }
 })
 export class WeatherService {
 
+  icon: string;
   currentMode = 'current';
   displayMode: string = this.currentMode;
   locationConfig: LocationConfig;
@@ -18,6 +19,13 @@ export class WeatherService {
   currentItems: Array<any> = [];
   forecastItems: Array<any> = [];
   pollutionItems: Array<any> = [];
+  weatherCondition: Array<any> = [ '200', '201', '202', '210', '211', '212', '221', '230', '231', '232',
+                                   '300', '301', '302', '310', '311', '312', '313', '314', '321',
+                                   '500', '501', '502', '503', '504', '511', '520', '521', '522', '531',
+                                   '600', '601', '602', '611', '612', '613', '615', '616', '620', '621', '622',
+                                   '701', '711', '721', '731', '741', '751', '761', '762', '771', '781',
+                                   '800',
+                                   '801', '802', '803', '804'];
   DAYS: Array<string> = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   constructor(
@@ -40,6 +48,7 @@ export class WeatherService {
       // Location name will only be available for current conditions
       tmpArray.push({ name: 'Lokalizacja', value: data.name });
     }
+
     tmpArray.push({ name: 'Pogoda', value: `${data.weather[0].description}` });
     tmpArray.push({ name: 'Temperatura śr.', value: this.makeDegreeString(data.main.temp) });
     tmpArray.push({ name: 'Odczuwalna', value: this.makeDegreeString(data.main.feels_like) });
@@ -71,6 +80,9 @@ export class WeatherService {
     // Return the new array to the calling function
     tmpArray.push({ name: 'Temperatura min.', value: this.makeDegreeString(data.main.temp_min) });
     tmpArray.push({ name: 'Temperatura maks.', value: this.makeDegreeString(data.main.temp_max) });
+    tmpArray.push({ name: 'KodWarunków', value: `${data.weather[0].id}` });
+    tmpArray.push({ name: 'Warunki:', value: `${data.weather[0].main}` });
+    tmpArray.push({ wartosc: 'ikona', value: `${data.weather[0].icon}` });
     return tmpArray;
   }
 
@@ -99,6 +111,28 @@ export class WeatherService {
     return tmpArray;
   }
 
+  public formatIconData(data: any): any {
+    // TODO: Should probably move this to the weather service
+    console.log('HomePage: formatIconData()');
+    // create a blank array to hold our results
+    let ikona: string;
+    // Add the weather data values to the array
+    if (data.name) {
+      // Location name will only be available for current conditions
+      ikona = data.weather[0].icon;
+    }
+    return ikona;
+  }
+
+
+  public makeIconURL(ikona: string): string {
+    console.log('WeatherService: makeIconURL()');
+    let uri = Config.weatherIconEndpoint;
+    uri += `${ikona}`;
+    uri += `${Config.iconFormat}`;
+    console.log(`Service URL: ${uri}`);
+    return uri;
+  }
 
 
   private makePollutionURL(loc: LocationConfig, command: string): string {
@@ -187,4 +221,11 @@ export class WeatherService {
       });
     });
   }
+//
+//  weatherConditionsCheck() {
+//    if (this.forecastItems.) {
+//      return  this.icon = '01d';
+//    }
+//
+//  }
 }

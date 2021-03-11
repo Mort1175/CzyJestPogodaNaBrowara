@@ -53,7 +53,12 @@
           <p><strong>Weather data is not available</strong></p>
         </ion-item>
         <!--Display the current conditions data we have -->
+
+          <ion-img [src]="iconURL"></ion-img>
+
+
         <ion-item *ngFor="let c_item of currentItems">
+
           <p><strong>{{c_item.name}}:</strong> {{c_item.value}}</p>
         </ion-item>
       </ion-list>

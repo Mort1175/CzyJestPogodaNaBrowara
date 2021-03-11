@@ -16,6 +16,8 @@ enum TempScale { Fahrenheit, Celsius }
 })
 export class Tab2Page {
 
+    iconURL: any;
+    icon: string;
     currentMode = 'current';
     displayMode: string = this.currentMode;
     locationConfig: LocationConfig;
@@ -212,6 +214,8 @@ export class Tab2Page {
             if (data) {
               // We have data, so lets do something with it
               this.currentItems = this.service.formatWeatherData(data);
+              this.icon = this.service.formatIconData(data);
+              this.iconURL = this.service.makeIconURL(this.icon);
             }
           },
             error => {
@@ -224,6 +228,7 @@ export class Tab2Page {
           );
       });
   }
+
 
   public viewForecast(item: any) {
     console.log('HomePage: viewForecast()');
