@@ -14,8 +14,7 @@ export class Tab3Page {
   wilgotnosc: any;
   wiatr: any;
   constructor(
-    private appPreferences: AppPreferences,
-    private nativeStorage: NativeStorage,
+    public appPreferences: AppPreferences,
     private preferencje: Preferencje,
     private warunki: Warunki,
     ) {

@@ -9,6 +9,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import { AppPreferences } from '@ionic-native/app-preferences/ngx';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
      NativeStorage,
      SplashScreen,
      WeatherService,
+     AppPreferences,
      { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
